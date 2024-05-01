@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"math"
 	"net/http"
 	"net/url"
@@ -74,6 +75,8 @@ func (c *URIClient) DoHTTPGet(ctx context.Context, method string, params map[str
 	if c.AuthHeader != "" {
 		req.Header.Add("Authorization", c.AuthHeader)
 	}
+
+	log.Printf("REQUEST: %v\n", req)
 
 	resp, err := c.Client.Do(req)
 	if err != nil {
@@ -147,7 +150,7 @@ func (c *URIClient) DoBlockResults(ctx context.Context, height *int64) (*ctypes.
 		params["height"] = height
 	}
 
-	_, err := c.DoHTTPGet(ctx, "block_results", params, result)
+	_, err := c.DoHTTPGet(ctx, "block", params, result)
 	if err != nil {
 		return nil, err
 	}

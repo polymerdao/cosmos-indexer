@@ -30,7 +30,11 @@ func ProcessBlock(blockData *ctypes.ResultBlock, blockResultsData *ctypes.Result
 		ChainID: chainID,
 	}
 
-	propAddressFromHex, err := sdkTypes.ConsAddressFromHex(blockData.Block.ProposerAddress.String())
+	// DUMMY PROPOSER
+	proposerAddress := "d79f33d389dabace6bdef71a9eeade87bbb49e0b39ab8974839cb0"
+
+	//propAddressFromHex, err := sdkTypes.ConsAddressFromHex(blockData.Block.ProposerAddress.String())
+	propAddressFromHex, err := sdkTypes.ConsAddressFromHex(proposerAddress)
 	if err != nil {
 		return block, err
 	}
